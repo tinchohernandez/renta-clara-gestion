@@ -309,7 +309,10 @@ export type Database = {
         Row: {
           address: string | null
           bank_account: string | null
+          cbu: string | null
           created_at: string
+          cuit: string | null
+          dni: string | null
           dni_cuit: string | null
           email: string | null
           full_name: string
@@ -321,7 +324,10 @@ export type Database = {
         Insert: {
           address?: string | null
           bank_account?: string | null
+          cbu?: string | null
           created_at?: string
+          cuit?: string | null
+          dni?: string | null
           dni_cuit?: string | null
           email?: string | null
           full_name: string
@@ -333,7 +339,10 @@ export type Database = {
         Update: {
           address?: string | null
           bank_account?: string | null
+          cbu?: string | null
           created_at?: string
+          cuit?: string | null
+          dni?: string | null
           dni_cuit?: string | null
           email?: string | null
           full_name?: string
@@ -513,6 +522,8 @@ export type Database = {
         Row: {
           address: string | null
           created_at: string
+          cuit: string | null
+          dni: string | null
           dni_cuit: string | null
           email: string | null
           full_name: string
@@ -524,6 +535,8 @@ export type Database = {
         Insert: {
           address?: string | null
           created_at?: string
+          cuit?: string | null
+          dni?: string | null
           dni_cuit?: string | null
           email?: string | null
           full_name: string
@@ -535,6 +548,8 @@ export type Database = {
         Update: {
           address?: string | null
           created_at?: string
+          cuit?: string | null
+          dni?: string | null
           dni_cuit?: string | null
           email?: string | null
           full_name?: string
