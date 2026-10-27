@@ -588,6 +588,7 @@ export type Database = {
         }
         Returns: number
       }
+      can_read_document: { Args: { _name: string }; Returns: boolean }
       generate_receipts: { Args: { _period: string }; Returns: number }
       has_role: {
         Args: {
