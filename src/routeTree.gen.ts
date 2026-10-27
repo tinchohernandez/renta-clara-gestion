@@ -15,6 +15,8 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedPanelRouteImport } from './routes/_authenticated/panel'
+import { Route as AuthenticatedAdminContratosRouteImport } from './routes/_authenticated/admin/contratos'
+import { Route as AuthenticatedAdminIndicesRouteImport } from './routes/_authenticated/admin/indices'
 import { Route as AuthenticatedAdminInquilinosRouteImport } from './routes/_authenticated/admin/inquilinos'
 import { Route as AuthenticatedAdminPropiedadesRouteImport } from './routes/_authenticated/admin/propiedades'
 import { Route as AuthenticatedAdminPropietariosRouteImport } from './routes/_authenticated/admin/propietarios'
@@ -48,6 +50,18 @@ const AuthenticatedPanelRoute = AuthenticatedPanelRouteImport.update({
   path: '/panel',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedAdminContratosRoute =
+  AuthenticatedAdminContratosRouteImport.update({
+    id: '/contratos',
+    path: '/contratos',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminIndicesRoute =
+  AuthenticatedAdminIndicesRouteImport.update({
+    id: '/indices',
+    path: '/indices',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
 const AuthenticatedAdminInquilinosRoute =
   AuthenticatedAdminInquilinosRouteImport.update({
     id: '/inquilinos',
@@ -73,6 +87,8 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/panel': typeof AuthenticatedPanelRoute
+  '/admin/contratos': typeof AuthenticatedAdminContratosRoute
+  '/admin/indices': typeof AuthenticatedAdminIndicesRoute
   '/admin/inquilinos': typeof AuthenticatedAdminInquilinosRoute
   '/admin/propiedades': typeof AuthenticatedAdminPropiedadesRoute
   '/admin/propietarios': typeof AuthenticatedAdminPropietariosRoute
@@ -83,6 +99,8 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/panel': typeof AuthenticatedPanelRoute
+  '/admin/contratos': typeof AuthenticatedAdminContratosRoute
+  '/admin/indices': typeof AuthenticatedAdminIndicesRoute
   '/admin/inquilinos': typeof AuthenticatedAdminInquilinosRoute
   '/admin/propiedades': typeof AuthenticatedAdminPropiedadesRoute
   '/admin/propietarios': typeof AuthenticatedAdminPropietariosRoute
@@ -95,6 +113,8 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
   '/_authenticated/panel': typeof AuthenticatedPanelRoute
+  '/_authenticated/admin/contratos': typeof AuthenticatedAdminContratosRoute
+  '/_authenticated/admin/indices': typeof AuthenticatedAdminIndicesRoute
   '/_authenticated/admin/inquilinos': typeof AuthenticatedAdminInquilinosRoute
   '/_authenticated/admin/propiedades': typeof AuthenticatedAdminPropiedadesRoute
   '/_authenticated/admin/propietarios': typeof AuthenticatedAdminPropietariosRoute
@@ -107,6 +127,8 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/admin'
     | '/panel'
+    | '/admin/contratos'
+    | '/admin/indices'
     | '/admin/inquilinos'
     | '/admin/propiedades'
     | '/admin/propietarios'
@@ -117,6 +139,8 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/admin'
     | '/panel'
+    | '/admin/contratos'
+    | '/admin/indices'
     | '/admin/inquilinos'
     | '/admin/propiedades'
     | '/admin/propietarios'
@@ -128,6 +152,8 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/_authenticated/admin'
     | '/_authenticated/panel'
+    | '/_authenticated/admin/contratos'
+    | '/_authenticated/admin/indices'
     | '/_authenticated/admin/inquilinos'
     | '/_authenticated/admin/propiedades'
     | '/_authenticated/admin/propietarios'
@@ -184,6 +210,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPanelRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/admin/contratos': {
+      id: '/_authenticated/admin/contratos'
+      path: '/contratos'
+      fullPath: '/admin/contratos'
+      preLoaderRoute: typeof AuthenticatedAdminContratosRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/indices': {
+      id: '/_authenticated/admin/indices'
+      path: '/indices'
+      fullPath: '/admin/indices'
+      preLoaderRoute: typeof AuthenticatedAdminIndicesRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
     '/_authenticated/admin/inquilinos': {
       id: '/_authenticated/admin/inquilinos'
       path: '/inquilinos'
@@ -209,12 +249,16 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedAdminRouteChildren {
+  AuthenticatedAdminContratosRoute: typeof AuthenticatedAdminContratosRoute
+  AuthenticatedAdminIndicesRoute: typeof AuthenticatedAdminIndicesRoute
   AuthenticatedAdminInquilinosRoute: typeof AuthenticatedAdminInquilinosRoute
   AuthenticatedAdminPropiedadesRoute: typeof AuthenticatedAdminPropiedadesRoute
   AuthenticatedAdminPropietariosRoute: typeof AuthenticatedAdminPropietariosRoute
 }
 
 const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
+  AuthenticatedAdminContratosRoute: AuthenticatedAdminContratosRoute,
+  AuthenticatedAdminIndicesRoute: AuthenticatedAdminIndicesRoute,
   AuthenticatedAdminInquilinosRoute: AuthenticatedAdminInquilinosRoute,
   AuthenticatedAdminPropiedadesRoute: AuthenticatedAdminPropiedadesRoute,
   AuthenticatedAdminPropietariosRoute: AuthenticatedAdminPropietariosRoute,
