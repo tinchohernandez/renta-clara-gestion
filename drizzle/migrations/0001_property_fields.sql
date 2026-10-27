@@ -1,0 +1,1 @@
+alter table public.properties add column street_number text, add column floor_unit text, add column cadastral_code text, add column property_value numeric(14,2), add column value_currency public.currency_code not null default 'USD';

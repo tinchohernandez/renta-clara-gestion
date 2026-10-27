@@ -10,33 +10,232 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as AuthenticatedInquilinoRouteImport } from './routes/_authenticated/inquilino'
+import { Route as AuthenticatedPanelRouteImport } from './routes/_authenticated/panel'
+import { Route as AuthenticatedPropietarioRouteImport } from './routes/_authenticated/propietario'
+import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
+import { Route as AuthenticatedAdminCajaRouteImport } from './routes/_authenticated/admin/caja'
+import { Route as AuthenticatedAdminContratosRouteImport } from './routes/_authenticated/admin/contratos'
+import { Route as AuthenticatedAdminIndicesRouteImport } from './routes/_authenticated/admin/indices'
+import { Route as AuthenticatedAdminInquilinosRouteImport } from './routes/_authenticated/admin/inquilinos'
+import { Route as AuthenticatedAdminPagosRouteImport } from './routes/_authenticated/admin/pagos'
+import { Route as AuthenticatedAdminPropiedadesRouteImport } from './routes/_authenticated/admin/propiedades'
+import { Route as AuthenticatedAdminPropietariosRouteImport } from './routes/_authenticated/admin/propietarios'
+import { Route as AuthenticatedAdminReclamosRouteImport } from './routes/_authenticated/admin/reclamos'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedInquilinoRoute = AuthenticatedInquilinoRouteImport.update({
+  id: '/inquilino',
+  path: '/inquilino',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedPanelRoute = AuthenticatedPanelRouteImport.update({
+  id: '/panel',
+  path: '/panel',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedPropietarioRoute =
+  AuthenticatedPropietarioRouteImport.update({
+    id: '/propietario',
+    path: '/propietario',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthenticatedAdminRoute,
+} as any)
+const AuthenticatedAdminCajaRoute = AuthenticatedAdminCajaRouteImport.update({
+  id: '/caja',
+  path: '/caja',
+  getParentRoute: () => AuthenticatedAdminRoute,
+} as any)
+const AuthenticatedAdminContratosRoute =
+  AuthenticatedAdminContratosRouteImport.update({
+    id: '/contratos',
+    path: '/contratos',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminIndicesRoute =
+  AuthenticatedAdminIndicesRouteImport.update({
+    id: '/indices',
+    path: '/indices',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminInquilinosRoute =
+  AuthenticatedAdminInquilinosRouteImport.update({
+    id: '/inquilinos',
+    path: '/inquilinos',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminPagosRoute = AuthenticatedAdminPagosRouteImport.update({
+  id: '/pagos',
+  path: '/pagos',
+  getParentRoute: () => AuthenticatedAdminRoute,
+} as any)
+const AuthenticatedAdminPropiedadesRoute =
+  AuthenticatedAdminPropiedadesRouteImport.update({
+    id: '/propiedades',
+    path: '/propiedades',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminPropietariosRoute =
+  AuthenticatedAdminPropietariosRouteImport.update({
+    id: '/propietarios',
+    path: '/propietarios',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminReclamosRoute =
+  AuthenticatedAdminReclamosRouteImport.update({
+    id: '/reclamos',
+    path: '/reclamos',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/admin': typeof AuthenticatedAdminRouteWithChildren
+  '/inquilino': typeof AuthenticatedInquilinoRoute
+  '/panel': typeof AuthenticatedPanelRoute
+  '/propietario': typeof AuthenticatedPropietarioRoute
+  '/admin/caja': typeof AuthenticatedAdminCajaRoute
+  '/admin/contratos': typeof AuthenticatedAdminContratosRoute
+  '/admin/indices': typeof AuthenticatedAdminIndicesRoute
+  '/admin/inquilinos': typeof AuthenticatedAdminInquilinosRoute
+  '/admin/pagos': typeof AuthenticatedAdminPagosRoute
+  '/admin/propiedades': typeof AuthenticatedAdminPropiedadesRoute
+  '/admin/propietarios': typeof AuthenticatedAdminPropietariosRoute
+  '/admin/reclamos': typeof AuthenticatedAdminReclamosRoute
+  '/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/inquilino': typeof AuthenticatedInquilinoRoute
+  '/panel': typeof AuthenticatedPanelRoute
+  '/propietario': typeof AuthenticatedPropietarioRoute
+  '/admin/caja': typeof AuthenticatedAdminCajaRoute
+  '/admin/contratos': typeof AuthenticatedAdminContratosRoute
+  '/admin/indices': typeof AuthenticatedAdminIndicesRoute
+  '/admin/inquilinos': typeof AuthenticatedAdminInquilinosRoute
+  '/admin/pagos': typeof AuthenticatedAdminPagosRoute
+  '/admin/propiedades': typeof AuthenticatedAdminPropiedadesRoute
+  '/admin/propietarios': typeof AuthenticatedAdminPropietariosRoute
+  '/admin/reclamos': typeof AuthenticatedAdminReclamosRoute
+  '/admin': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
+  '/_authenticated/inquilino': typeof AuthenticatedInquilinoRoute
+  '/_authenticated/panel': typeof AuthenticatedPanelRoute
+  '/_authenticated/propietario': typeof AuthenticatedPropietarioRoute
+  '/_authenticated/admin/caja': typeof AuthenticatedAdminCajaRoute
+  '/_authenticated/admin/contratos': typeof AuthenticatedAdminContratosRoute
+  '/_authenticated/admin/indices': typeof AuthenticatedAdminIndicesRoute
+  '/_authenticated/admin/inquilinos': typeof AuthenticatedAdminInquilinosRoute
+  '/_authenticated/admin/pagos': typeof AuthenticatedAdminPagosRoute
+  '/_authenticated/admin/propiedades': typeof AuthenticatedAdminPropiedadesRoute
+  '/_authenticated/admin/propietarios': typeof AuthenticatedAdminPropietariosRoute
+  '/_authenticated/admin/reclamos': typeof AuthenticatedAdminReclamosRoute
+  '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/reset-password'
+    | '/admin'
+    | '/inquilino'
+    | '/panel'
+    | '/propietario'
+    | '/admin/caja'
+    | '/admin/contratos'
+    | '/admin/indices'
+    | '/admin/inquilinos'
+    | '/admin/pagos'
+    | '/admin/propiedades'
+    | '/admin/propietarios'
+    | '/admin/reclamos'
+    | '/admin/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auth'
+    | '/reset-password'
+    | '/inquilino'
+    | '/panel'
+    | '/propietario'
+    | '/admin/caja'
+    | '/admin/contratos'
+    | '/admin/indices'
+    | '/admin/inquilinos'
+    | '/admin/pagos'
+    | '/admin/propiedades'
+    | '/admin/propietarios'
+    | '/admin/reclamos'
+    | '/admin'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/auth'
+    | '/reset-password'
+    | '/_authenticated/admin'
+    | '/_authenticated/inquilino'
+    | '/_authenticated/panel'
+    | '/_authenticated/propietario'
+    | '/_authenticated/admin/caja'
+    | '/_authenticated/admin/contratos'
+    | '/_authenticated/admin/indices'
+    | '/_authenticated/admin/inquilinos'
+    | '/_authenticated/admin/pagos'
+    | '/_authenticated/admin/propiedades'
+    | '/_authenticated/admin/propietarios'
+    | '/_authenticated/admin/reclamos'
+    | '/_authenticated/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +247,170 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/inquilino': {
+      id: '/_authenticated/inquilino'
+      path: '/inquilino'
+      fullPath: '/inquilino'
+      preLoaderRoute: typeof AuthenticatedInquilinoRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/panel': {
+      id: '/_authenticated/panel'
+      path: '/panel'
+      fullPath: '/panel'
+      preLoaderRoute: typeof AuthenticatedPanelRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/propietario': {
+      id: '/_authenticated/propietario'
+      path: '/propietario'
+      fullPath: '/propietario'
+      preLoaderRoute: typeof AuthenticatedPropietarioRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/': {
+      id: '/_authenticated/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/caja': {
+      id: '/_authenticated/admin/caja'
+      path: '/caja'
+      fullPath: '/admin/caja'
+      preLoaderRoute: typeof AuthenticatedAdminCajaRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/contratos': {
+      id: '/_authenticated/admin/contratos'
+      path: '/contratos'
+      fullPath: '/admin/contratos'
+      preLoaderRoute: typeof AuthenticatedAdminContratosRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/indices': {
+      id: '/_authenticated/admin/indices'
+      path: '/indices'
+      fullPath: '/admin/indices'
+      preLoaderRoute: typeof AuthenticatedAdminIndicesRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/inquilinos': {
+      id: '/_authenticated/admin/inquilinos'
+      path: '/inquilinos'
+      fullPath: '/admin/inquilinos'
+      preLoaderRoute: typeof AuthenticatedAdminInquilinosRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/pagos': {
+      id: '/_authenticated/admin/pagos'
+      path: '/pagos'
+      fullPath: '/admin/pagos'
+      preLoaderRoute: typeof AuthenticatedAdminPagosRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/propiedades': {
+      id: '/_authenticated/admin/propiedades'
+      path: '/propiedades'
+      fullPath: '/admin/propiedades'
+      preLoaderRoute: typeof AuthenticatedAdminPropiedadesRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/propietarios': {
+      id: '/_authenticated/admin/propietarios'
+      path: '/propietarios'
+      fullPath: '/admin/propietarios'
+      preLoaderRoute: typeof AuthenticatedAdminPropietariosRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/reclamos': {
+      id: '/_authenticated/admin/reclamos'
+      path: '/reclamos'
+      fullPath: '/admin/reclamos'
+      preLoaderRoute: typeof AuthenticatedAdminReclamosRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
   }
 }
 
+interface AuthenticatedAdminRouteChildren {
+  AuthenticatedAdminCajaRoute: typeof AuthenticatedAdminCajaRoute
+  AuthenticatedAdminContratosRoute: typeof AuthenticatedAdminContratosRoute
+  AuthenticatedAdminIndicesRoute: typeof AuthenticatedAdminIndicesRoute
+  AuthenticatedAdminInquilinosRoute: typeof AuthenticatedAdminInquilinosRoute
+  AuthenticatedAdminPagosRoute: typeof AuthenticatedAdminPagosRoute
+  AuthenticatedAdminPropiedadesRoute: typeof AuthenticatedAdminPropiedadesRoute
+  AuthenticatedAdminPropietariosRoute: typeof AuthenticatedAdminPropietariosRoute
+  AuthenticatedAdminReclamosRoute: typeof AuthenticatedAdminReclamosRoute
+  AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+}
+
+const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
+  AuthenticatedAdminCajaRoute: AuthenticatedAdminCajaRoute,
+  AuthenticatedAdminContratosRoute: AuthenticatedAdminContratosRoute,
+  AuthenticatedAdminIndicesRoute: AuthenticatedAdminIndicesRoute,
+  AuthenticatedAdminInquilinosRoute: AuthenticatedAdminInquilinosRoute,
+  AuthenticatedAdminPagosRoute: AuthenticatedAdminPagosRoute,
+  AuthenticatedAdminPropiedadesRoute: AuthenticatedAdminPropiedadesRoute,
+  AuthenticatedAdminPropietariosRoute: AuthenticatedAdminPropietariosRoute,
+  AuthenticatedAdminReclamosRoute: AuthenticatedAdminReclamosRoute,
+  AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+}
+
+const AuthenticatedAdminRouteWithChildren =
+  AuthenticatedAdminRoute._addFileChildren(AuthenticatedAdminRouteChildren)
+
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRouteWithChildren
+  AuthenticatedInquilinoRoute: typeof AuthenticatedInquilinoRoute
+  AuthenticatedPanelRoute: typeof AuthenticatedPanelRoute
+  AuthenticatedPropietarioRoute: typeof AuthenticatedPropietarioRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRouteWithChildren,
+  AuthenticatedInquilinoRoute: AuthenticatedInquilinoRoute,
+  AuthenticatedPanelRoute: AuthenticatedPanelRoute,
+  AuthenticatedPropietarioRoute: AuthenticatedPropietarioRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
