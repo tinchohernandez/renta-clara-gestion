@@ -406,30 +406,45 @@ export type Database = {
       properties: {
         Row: {
           address: string
+          cadastral_code: string | null
           city: string | null
           created_at: string
           description: string | null
+          floor_unit: string | null
           id: string
           owner_id: string
           property_type: string
+          property_value: number | null
+          street_number: string | null
+          value_currency: Database["public"]["Enums"]["currency_code"]
         }
         Insert: {
           address: string
+          cadastral_code?: string | null
           city?: string | null
           created_at?: string
           description?: string | null
+          floor_unit?: string | null
           id?: string
           owner_id: string
           property_type?: string
+          property_value?: number | null
+          street_number?: string | null
+          value_currency?: Database["public"]["Enums"]["currency_code"]
         }
         Update: {
           address?: string
+          cadastral_code?: string | null
           city?: string | null
           created_at?: string
           description?: string | null
+          floor_unit?: string | null
           id?: string
           owner_id?: string
           property_type?: string
+          property_value?: number | null
+          street_number?: string | null
+          value_currency?: Database["public"]["Enums"]["currency_code"]
         }
         Relationships: [
           {
