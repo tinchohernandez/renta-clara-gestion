@@ -105,6 +105,8 @@ export const adminSetPassword = createServerFn({ method: "POST" })
   .handler(async ({ data, context }) => {
     const { data: isAdmin } = await context.supabase.rpc("has_role", { _user_id: context.userId, _role: "admin" });
     if (!isAdmin) throw new Error("No autorizado");
+    const { data: targetIsAdmin } = await context.supabase.rpc("has_role", { _user_id: data.userId, _role: "admin" });
+    if (targetIsAdmin) throw new Error("No se puede cambiar desde acá la contraseña de un administrador");
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { error } = await supabaseAdmin.auth.admin.updateUserById(data.userId, { password: data.password });
     if (error) throw new Error(error.message);

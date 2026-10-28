@@ -17,6 +17,7 @@ const nav = [
   { to: "/admin/reclamos", label: "Reclamos" },
   { to: "/admin/indices", label: "Índices" },
   { to: "/admin/caja", label: "Caja" },
+  { to: "/admin/equipo", label: "Equipo" },
 ];
 
 function AdminLayout() {

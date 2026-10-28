@@ -583,6 +583,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      add_admin: { Args: { _email: string }; Returns: undefined }
       adjust_contract_manual: {
         Args: { _contract: string; _pct: number }
         Returns: number
@@ -614,7 +615,12 @@ export type Database = {
       }
       is_contract_owner: { Args: { _contract: string }; Returns: boolean }
       is_contract_tenant: { Args: { _contract: string }; Returns: boolean }
+      list_admins: {
+        Args: never
+        Returns: { added_at: string; admin_email: string; is_active: boolean }[]
+      }
       receipt_contract: { Args: { _receipt: string }; Returns: string }
+      remove_admin: { Args: { _email: string }; Returns: undefined }
       review_payment: {
         Args: { _approve: boolean; _note?: string; _proof: string }
         Returns: undefined

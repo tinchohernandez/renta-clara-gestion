@@ -29,6 +29,20 @@
       "when": 1793115983803,
       "tag": "0003_owner_fields",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1793200000000,
+      "tag": "0004_security_and_admins",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1793200100000,
+      "tag": "0005_hardening_details",
+      "breakpoints": true
     }
   ]
 }
