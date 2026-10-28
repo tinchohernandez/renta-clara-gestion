@@ -10,7 +10,9 @@ import { Button } from "@/components/ui/button";
 import { Empty, PageTitle, StatusBadge } from "@/components/AppShell";
 import { dateLabel, monthLabel, money, propertyLabel } from "@/lib/format";
 
-export const Route = createFileRoute("/_authenticated/admin/pagos")({ component: Pagos });
+import { pageHead } from "@/lib/page-head";
+
+export const Route = createFileRoute("/_authenticated/admin/pagos")({ component: Pagos, head: () => pageHead("Comprobantes de pago", "Revisión de comprobantes y confirmación de pagos de alquileres.") });
 
 function Pagos() {
   const qc = useQueryClient();
@@ -22,7 +24,7 @@ function Pagos() {
   const review = useMutation({
     mutationFn: async ({ id, ok }: { id: string; ok: boolean }) => {
       const note = ok ? null : prompt("Motivo del rechazo") ?? null;
-      const { error } = await supabase.rpc("review_payment", { _proof: id, _approve: ok, _note: note ?? undefined });
+      const { error } = await supabase.rpc("review_payment", note ? { _proof: id, _approve: ok, _note: note } : { _proof: id, _approve: ok });
       if (error) throw error;
     },
     onSuccess: (_d, v) => { toast.success(v.ok ? "Pago confirmado y administración sumada a la caja" : "Comprobante rechazado"); qc.invalidateQueries(); },

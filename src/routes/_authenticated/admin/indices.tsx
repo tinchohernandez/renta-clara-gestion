@@ -9,7 +9,9 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Field, PageTitle, selectClass } from "@/components/AppShell";
 import { INDEX_LABELS, dateLabel, monthLabel, monthStart, money, propertyLabel } from "@/lib/format";
 
-export const Route = createFileRoute("/_authenticated/admin/indices")({ component: Indices });
+import { pageHead } from "@/lib/page-head";
+
+export const Route = createFileRoute("/_authenticated/admin/indices")({ component: Indices, head: () => pageHead("Índices de actualización", "Gestión de índices y ajustes de los contratos de alquiler.") });
 
 type Idx = "IPC" | "IPC_NEUQUEN" | "ICL";
 

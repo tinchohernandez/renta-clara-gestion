@@ -10,12 +10,24 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Empty, Field, PageTitle, selectClass } from "@/components/AppShell";
 import { INDEX_LABELS, commission, dateLabel, money, propertyLabel } from "@/lib/format";
+import { contractEndDate } from "@/lib/contract-duration";
 
-export const Route = createFileRoute("/_authenticated/admin/contratos")({ component: Contratos });
+export const Route = createFileRoute("/_authenticated/admin/contratos")({
+  component: Contratos,
+  head: () => ({ meta: [
+    { title: "Contratos | Administración inmobiliaria" },
+    { name: "description", content: "Gestión de contratos de alquiler, vigencia, ajustes y administración." },
+    { property: "og:title", content: "Contratos | Administración inmobiliaria" },
+    { property: "og:description", content: "Gestión de contratos de alquiler, vigencia, ajustes y administración." },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary" },
+  ] }),
+});
 
 type Idx = "IPC" | "IPC_NEUQUEN" | "ICL" | "ACUERDO";
 type Form = {
   id?: string; property_id?: string; tenant_id?: string; start_date?: string; end_date?: string;
+  duration_months?: number | string;
   currency: "ARS" | "USD"; base_rent?: string | number; adjustment_index: Idx; adjustment_frequency_months: number | string;
   commission_type: "percent" | "fixed"; commission_value?: string | number; due_day: number | string; status?: string;
   fees_paid: boolean; fees_amount?: string | number | null; fees_installments?: string | number | null; notes?: string | null;
@@ -42,8 +54,10 @@ function Contratos() {
   const save = useMutation({
     mutationFn: async (v: Form) => {
       if (!v.property_id || !v.tenant_id) throw new Error("El contrato necesita una propiedad y un inquilino");
+      const endDate = v.id ? v.end_date : contractEndDate(v.start_date, v.duration_months);
+      if (!v.start_date || !endDate) throw new Error("Indicá la fecha de inicio y una duración válida en meses");
       const common = {
-        property_id: v.property_id, tenant_id: v.tenant_id, start_date: v.start_date!, end_date: v.end_date!,
+        property_id: v.property_id, tenant_id: v.tenant_id, start_date: v.start_date, end_date: endDate,
         currency: v.currency, adjustment_index: v.adjustment_index, adjustment_frequency_months: Number(v.adjustment_frequency_months),
         commission_type: v.commission_type, commission_value: Number(v.commission_value ?? 0), due_day: Number(v.due_day),
         notes: v.notes || null, status: v.status ?? "active",
@@ -131,7 +145,14 @@ function Contratos() {
                 </select>
               </Field>
               <Field label="Inicio *"><Input type="date" required value={f.start_date ?? ""} onChange={(e) => setF({ ...f, start_date: e.target.value })} /></Field>
-              <Field label="Fin *"><Input type="date" required value={f.end_date ?? ""} onChange={(e) => setF({ ...f, end_date: e.target.value })} /></Field>
+              {f.id ? (
+                <Field label="Fin *"><Input type="date" required value={f.end_date ?? ""} onChange={(e) => setF({ ...f, end_date: e.target.value })} /></Field>
+              ) : (
+                <>
+                  <Field label="Duración del contrato (meses) *"><Input type="number" min={1} step={1} required value={f.duration_months ?? ""} onChange={(e) => setF({ ...f, duration_months: e.target.value })} /></Field>
+                  <Field label="Fecha de finalización" className="sm:col-span-2"><Input type="date" readOnly value={contractEndDate(f.start_date, f.duration_months)} /></Field>
+                </>
+              )}
               <Field label="Moneda">
                 <select className={selectClass} value={f.currency} onChange={(e) => setF({ ...f, currency: e.target.value as "ARS" | "USD" })}>
                   <option value="ARS">Pesos (ARS)</option><option value="USD">Dólares (USD)</option>

@@ -33,7 +33,7 @@ function AuthPage() {
     setBusy(true);
     const { error } = await supabase.auth.signInWithPassword({ email, password });
     setBusy(false);
-    if (error) return toast.error(error.message === "Invalid login credentials" ? "Email o contraseña incorrectos" : error.message);
+    if (error) { toast.error(error.message === "Invalid login credentials" ? "Email o contraseña incorrectos" : error.message); return; }
     navigate({ to: "/panel" });
   }
   async function signup(e: React.FormEvent) {
@@ -41,7 +41,7 @@ function AuthPage() {
     setBusy(true);
     const { error } = await supabase.auth.signUp({ email, password, options: { emailRedirectTo: window.location.origin + "/panel" } });
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success("Te enviamos un email para confirmar tu cuenta.");
     setTab("login");
   }
@@ -50,7 +50,7 @@ function AuthPage() {
     setBusy(true);
     const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: window.location.origin + "/reset-password" });
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success("Si el email existe, vas a recibir un enlace para cambiar la contraseña.");
   }
 

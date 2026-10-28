@@ -12,7 +12,9 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Empty, Field, PageTitle, selectClass } from "@/components/AppShell";
 import { money } from "@/lib/format";
 
-export const Route = createFileRoute("/_authenticated/admin/propiedades")({ component: Propiedades });
+import { pageHead } from "@/lib/page-head";
+
+export const Route = createFileRoute("/_authenticated/admin/propiedades")({ component: Propiedades, head: () => pageHead("Propiedades", "Inmuebles administrados y sus propietarios asociados.") });
 
 const TYPES = ["Departamento", "Casa", "Local", "Oficina", "Cochera", "Galpón", "Terreno", "Otro"];
 type Form = {
