@@ -98,9 +98,9 @@ export function PartyManager({ kind, title, singular }: { kind: Kind; title: str
               {data.map((p) => (
                 <TableRow key={p.id}>
                   <TableCell className="font-medium">{p.full_name}</TableCell>
-                  <TableCell className="text-sm">{[p.dni, p.cuit].filter(Boolean).join(" · ") || "-"}</TableCell>
-                  <TableCell className="text-sm">{p.email}<div className="text-muted-foreground">{p.phone}</div></TableCell>
-                  {kind === "owners" && <TableCell className="text-sm">{p.cbu || "-"}</TableCell>}
+                  <TableCell className="text-sm">{[p["dni"], p["cuit"]].filter(Boolean).join(" · ") || "-"}</TableCell>
+                  <TableCell className="text-sm">{p["email"]}<div className="text-muted-foreground">{p["phone"]}</div></TableCell>
+                  {kind === "owners" && <TableCell className="text-sm">{p["cbu"] || "-"}</TableCell>}
                   <TableCell>
                     {p.user_id ? <span className="text-sm text-success">Registrado</span> : <span className="text-sm text-muted-foreground">Sin registrarse</span>}
                   </TableCell>
@@ -153,7 +153,8 @@ export function PartyManager({ kind, title, singular }: { kind: Kind; title: str
             onSubmit={async (e) => {
               e.preventDefault();
               try {
-                await setPass({ data: { userId: pwFor!.user_id!, password: pw } });
+                if (!pwFor?.user_id) return;
+                await setPass({ data: { userId: pwFor.user_id, password: pw } });
                 toast.success("Contraseña actualizada. Comunicásela a la persona.");
                 setPwFor(null);
               } catch (err) {

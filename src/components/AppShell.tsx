@@ -34,7 +34,7 @@ export function AppShell({ title, nav, children }: { title: string; nav?: { to: 
               <Link
                 key={n.to}
                 to={n.to}
-                activeOptions={{ exact: n.exact }}
+                activeOptions={{ exact: n.exact ?? false }}
                 className="whitespace-nowrap border-b-2 border-transparent px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground"
                 activeProps={{ className: "border-primary text-foreground" }}
               >

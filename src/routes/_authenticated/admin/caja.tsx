@@ -13,8 +13,8 @@ import { dateLabel, monthStart, money } from "@/lib/format";
 
 export const Route = createFileRoute("/_authenticated/admin/caja")({ component: Caja });
 
-const INCOME_CATS = ["Venta", "Tasación", "Honorarios extra", "Otro ingreso"];
-const EXPENSE_CATS = ["Sueldos", "Alquiler oficina", "Servicios", "Impuestos", "Publicidad", "Mantenimiento", "Otro gasto"];
+const INCOME_CATS: [string, ...string[]] = ["Venta", "Tasación", "Honorarios extra", "Otro ingreso"];
+const EXPENSE_CATS: [string, ...string[]] = ["Sueldos", "Alquiler oficina", "Servicios", "Impuestos", "Publicidad", "Mantenimiento", "Otro gasto"];
 type Mov = { kind: "income" | "expense"; category: string; description: string; amount: string; currency: "ARS" | "USD"; movement_date: string };
 
 function Caja() {

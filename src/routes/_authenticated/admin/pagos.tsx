@@ -22,7 +22,7 @@ function Pagos() {
   const review = useMutation({
     mutationFn: async ({ id, ok }: { id: string; ok: boolean }) => {
       const note = ok ? null : prompt("Motivo del rechazo") ?? null;
-      const { error } = await supabase.rpc("review_payment", { _proof: id, _approve: ok, _note: note ?? undefined });
+      const { error } = await supabase.rpc("review_payment", note ? { _proof: id, _approve: ok, _note: note } : { _proof: id, _approve: ok });
       if (error) throw error;
     },
     onSuccess: (_d, v) => { toast.success(v.ok ? "Pago confirmado y administración sumada a la caja" : "Comprobante rechazado"); qc.invalidateQueries(); },

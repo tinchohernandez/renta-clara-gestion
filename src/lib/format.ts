@@ -8,7 +8,7 @@ export function monthStart(d = new Date()) {
 }
 
 export function monthLabel(period: string) {
-  const [y, m] = period.split("-").map(Number);
+  const [y = 1970, m = 1] = period.split("-").map(Number);
   return new Date(y, m - 1, 1).toLocaleDateString("es-AR", { month: "long", year: "numeric" });
 }
 
