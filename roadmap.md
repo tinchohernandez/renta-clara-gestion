@@ -4,8 +4,10 @@
 - [x] Campos de propiedad: dirección, altura, piso/UF, nomenclatura catastral, valor, tipo
 - [x] Campos de propietario: nombre, DNI, CUIT/CUIL, dirección, mail, teléfono, CBU
 - [x] Propiedad exige propietario; contrato exige propiedad + inquilino (forzado en la base de datos y formularios)
-- [ ] Login/registro + recuperación de contraseña
+- [x] Login/registro + recuperación de contraseña (cuentas se vinculan solo con email confirmado)
+- [x] Equipo: la inmobiliaria habilita más administradores por email
+- [x] Base de datos propia en Supabase (proyecto renta-clara) con permisos por rol probados
 - [ ] Panel inmobiliaria (ABM, contratos con honorarios, pagos, índices, reclamos, caja)
 - [ ] Panel inquilino (recibo, comprobante, reclamo, factura)
 - [ ] Panel propietario (rendición, subir factura)
-- [ ] IA Claude: leer comprobantes, analizar reclamos
+- [ ] IA Claude: leer comprobantes, analizar reclamos (POSPUESTO a propósito: está desactivada para no generar costos durante el desarrollo; se activa cargando ANTHROPIC_API_KEY cuando el resto esté terminado. Sin la clave, comprobantes y reclamos se manejan a mano)
