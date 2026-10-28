@@ -23,7 +23,7 @@ function makeModel() {
   const direct = process.env["ANTHROPIC_API_KEY"];
   if (direct) return createAnthropic({ apiKey: direct })("claude-sonnet-5-5");
   const gateway = process.env["LOVABLE_API_KEY"];
-  if (!gateway) throw new Error("Falta configurar la clave de IA");
+  if (!gateway) throw new Error("La IA todavía no está activada. Verificá el dato a mano.");
   return createAnthropic({
     baseURL: "https://ai.gateway.lovable.dev/v1",
     apiKey: gateway,
