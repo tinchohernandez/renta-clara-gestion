@@ -14,19 +14,29 @@ function runIdFetch() {
   };
 }
 
-/** Calls Claude through Lovable AI Gateway (streamed) and returns parsed JSON from the answer. */
-export async function askClaudeJson<T>(system: string, messages: ModelMessage[]): Promise<T> {
-  const apiKey = process.env["LOVABLE_API_KEY"];
-  if (!apiKey) throw new Error("Falta configurar la clave de IA");
-  const anthropic = createAnthropic({
+/**
+ * Elige cómo hablar con Claude:
+ * 1) ANTHROPIC_API_KEY: API de Anthropic directa (clave propia, no depende de Lovable).
+ * 2) LOVABLE_API_KEY: respaldo, vía el gateway de Lovable (solo funciona con su suscripción).
+ */
+function makeModel() {
+  const direct = process.env["ANTHROPIC_API_KEY"];
+  if (direct) return createAnthropic({ apiKey: direct })("claude-sonnet-5-5");
+  const gateway = process.env["LOVABLE_API_KEY"];
+  if (!gateway) throw new Error("Falta configurar la clave de IA");
+  return createAnthropic({
     baseURL: "https://ai.gateway.lovable.dev/v1",
-    apiKey,
+    apiKey: gateway,
     headers: { "X-Lovable-AIG-SDK": "vercel-ai-sdk" },
     fetch: runIdFetch() as typeof fetch,
-  });
+  })("anthropic/claude-sonnet-5");
+}
+
+/** Llama a Claude (en streaming) y devuelve el JSON de la respuesta ya parseado. */
+export async function askClaudeJson<T>(system: string, messages: ModelMessage[]): Promise<T> {
   let streamError: unknown;
   const result = streamText({
-    model: anthropic("anthropic/claude-sonnet-5"),
+    model: makeModel(),
     system,
     messages,
     maxOutputTokens: 4000,
