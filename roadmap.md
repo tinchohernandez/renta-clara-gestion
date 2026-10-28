@@ -1,4 +1,5 @@
 # Roadmap
+- [ ] Contratos nuevos: inicio y duración en meses con finalización automática
 - [x] Base de datos (propietarios, inquilinos, propiedades, contratos, recibos, comprobantes, facturas, reclamos, caja, índices)
 - [x] Campos de propiedad: dirección, altura, piso/UF, nomenclatura catastral, valor, tipo
 - [x] Campos de propietario: nombre, DNI, CUIT/CUIL, dirección, mail, teléfono, CBU
