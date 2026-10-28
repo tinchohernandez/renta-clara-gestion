@@ -10,3 +10,4 @@
 <!-- LOVABLE:END -->
 
 - Use the shared browser-safe contract-duration helper to derive new-contract end dates at display and save time; existing contracts retain their stored dates to avoid changing historical terms.
+- Use the shared page-head helper for standard content-page metadata so each page has its own title and description without duplicated tag lists.

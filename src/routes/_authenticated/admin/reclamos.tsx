@@ -11,7 +11,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Empty, PageTitle, StatusBadge, selectClass } from "@/components/AppShell";
 import { dateLabel, propertyLabel } from "@/lib/format";
 
-export const Route = createFileRoute("/_authenticated/admin/reclamos")({ component: Reclamos });
+import { pageHead } from "@/lib/page-head";
+
+export const Route = createFileRoute("/_authenticated/admin/reclamos")({ component: Reclamos, head: () => pageHead("Reclamos", "Seguimiento de reclamos de alquileres y respuestas a los inquilinos.") });
 
 function Reclamos() {
   const qc = useQueryClient();

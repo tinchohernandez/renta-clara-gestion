@@ -9,7 +9,9 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Empty, PageTitle, StatusBadge } from "@/components/AppShell";
 import { dateLabel, monthLabel, monthStart, money, propertyLabel } from "@/lib/format";
 
-export const Route = createFileRoute("/_authenticated/admin/")({ component: Resumen });
+import { pageHead } from "@/lib/page-head";
+
+export const Route = createFileRoute("/_authenticated/admin/")({ component: Resumen, head: () => pageHead("Recibos", "Recibos mensuales y estado de los alquileres administrados.") });
 
 function Resumen() {
   const qc = useQueryClient();

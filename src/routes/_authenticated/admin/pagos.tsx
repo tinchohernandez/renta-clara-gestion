@@ -10,7 +10,9 @@ import { Button } from "@/components/ui/button";
 import { Empty, PageTitle, StatusBadge } from "@/components/AppShell";
 import { dateLabel, monthLabel, money, propertyLabel } from "@/lib/format";
 
-export const Route = createFileRoute("/_authenticated/admin/pagos")({ component: Pagos });
+import { pageHead } from "@/lib/page-head";
+
+export const Route = createFileRoute("/_authenticated/admin/pagos")({ component: Pagos, head: () => pageHead("Comprobantes de pago", "Revisión de comprobantes y confirmación de pagos de alquileres.") });
 
 function Pagos() {
   const qc = useQueryClient();

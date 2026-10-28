@@ -11,7 +11,9 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Field, PageTitle, selectClass } from "@/components/AppShell";
 import { dateLabel, monthStart, money } from "@/lib/format";
 
-export const Route = createFileRoute("/_authenticated/admin/caja")({ component: Caja });
+import { pageHead } from "@/lib/page-head";
+
+export const Route = createFileRoute("/_authenticated/admin/caja")({ component: Caja, head: () => pageHead("Flujo de caja", "Ingresos, gastos y saldos de la inmobiliaria por moneda y mes.") });
 
 const INCOME_CATS: [string, ...string[]] = ["Venta", "Tasación", "Honorarios extra", "Otro ingreso"];
 const EXPENSE_CATS: [string, ...string[]] = ["Sueldos", "Alquiler oficina", "Servicios", "Impuestos", "Publicidad", "Mantenimiento", "Otro gasto"];
