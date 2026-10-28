@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Use the shared browser-safe contract-duration helper to derive new-contract end dates at display and save time; existing contracts retain their stored dates to avoid changing historical terms.
